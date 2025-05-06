@@ -60,8 +60,8 @@ const ShopPage: React.FC = () => {
                 key={index}
                 onClick={() => setFilter(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors text-white ${filter === category
-                    ? 'bg-[#16446A]'
-                    : 'bg-[#72AFC1] text-primary-medium hover:bg-[#16446A]'
+                    ? 'bg-[#FFEA00]'
+                    : 'bg-[#FFDB58] text-primary-medium hover:bg-[#FFEA00]'
                   }`}
               >
                 {category.charAt(0).toUpperCase() + category.slice(1)}

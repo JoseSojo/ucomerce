@@ -71,7 +71,7 @@ const Blog: React.FC = () => {
                   </div>
                 </div>
                 
-                <h3 className="text-xl font-semibold text-[#0A082D] mb-2 hover:text-[#16446A] transition-colors">
+                <h3 className="text-xl font-semibold text-[#793205] mb-2 hover:text-[#FFEA00] transition-colors">
                   <Link href="#">{article.title}</Link>
                 </h3>
                 
@@ -81,10 +81,10 @@ const Blog: React.FC = () => {
               <div className="px-6 pb-6 mt-auto">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center text-sm">
-                    <User size={14} className="mr-1 text-[#16446A]" />
+                    <User size={14} className="mr-1 text-[#FFEA00]" />
                     <span className="text-gray-600">{article.author}</span>
                   </div>
-                  <Link href="#" className="text-[#16446A] font-medium flex items-center hover:text-[#72AFC1] transition-colors">
+                  <Link href="#" className="text-[#FFEA00] font-medium flex items-center hover:text-[#FFDB58] transition-colors">
                     Leer más <ChevronRight size={16} className="ml-1" />
                   </Link>
                 </div>

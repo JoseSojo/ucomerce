@@ -53,7 +53,7 @@ const Training: React.FC = () => {
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="relative overflow-hidden">
-                <div className="absolute top-3 right-3 z-10 bg-[#72AFC1] text-white text-xs font-bold px-2 py-1 rounded">
+                <div className="absolute top-3 right-3 z-10 bg-[#FFDB58] text-white text-xs font-bold px-2 py-1 rounded">
                   {workshop.spots} lugares
                 </div>
                 <img
@@ -63,21 +63,21 @@ const Training: React.FC = () => {
                   alt={workshop.title}
                   className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A082D]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#793205]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
 
               <div className="p-5">
-                <h3 className="text-xl font-semibold text-[#0A082D] mb-3 group-hover:text-[#16446A] transition-colors">
+                <h3 className="text-xl font-semibold text-[#793205] mb-3 group-hover:text-[#FFEA00] transition-colors">
                   {workshop.title}
                 </h3>
 
                 <div className="flex flex-col space-y-2 mb-4">
                   <div className="flex items-center text-gray-600">
-                    <Calendar size={16} className="mr-2 text-[#72AFC1]" />
+                    <Calendar size={16} className="mr-2 text-[#FFDB58]" />
                     <span>{workshop.date}</span>
                   </div>
                   <div className="flex items-center text-gray-600">
-                    <MapPin size={16} className="mr-2 text-[#72AFC1]" />
+                    <MapPin size={16} className="mr-2 text-[#FFDB58]" />
                     <span>{workshop.location}</span>
                   </div>
                 </div>
@@ -86,14 +86,14 @@ const Training: React.FC = () => {
                   <div className="flex justify-between items-center mb-4">
                     <div className="text-sm">
                       <span className="text-gray-500">Instructor:</span>
-                      <span className="ml-1 font-medium text-[#16446A]">{workshop.instructor}</span>
+                      <span className="ml-1 font-medium text-[#FFEA00]">{workshop.instructor}</span>
                     </div>
-                    <div className="font-bold text-[#16446A]">{workshop.price}</div>
+                    <div className="font-bold text-[#FFEA00]">{workshop.price}</div>
                   </div>
 
                   <Link
                     href="#"
-                    className="block w-full py-2 text-center rounded bg-[#16446A] text-white hover:bg-[#0A082D] transition-colors"
+                    className="block w-full py-2 text-center rounded bg-[#FFEA00] text-white hover:bg-[#793205] transition-colors"
                   >
                     Reservar Lugar
                   </Link>

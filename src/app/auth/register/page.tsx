@@ -46,7 +46,7 @@ const RegisterPage: React.FC = () => {
 
   return (
     <div className="pt-16 md:pt-24 pb-24 min-h-screen flex items-center">
-      <div className='bg-gradient-to-l bg-red-400 from-[#72AFC1] to-[#16446A] h-[70px]'>
+      <div className='bg-gradient-to-l bg-red-400 from-[#FFDB58] to-[#FFEA00] h-[70px]'>
         <Header />
       </div>
       <div className="container mx-auto px-4">

@@ -24,8 +24,8 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
           <button
             onClick={() => setActiveTab(`description`)}
             className={`py-3 px-1 font-medium text-sm border-b-2 ${activeTab === `description`
-              ? 'border-[#16446A] text-[#16446A]'
-              : 'border-transparent text-gray-500 hover:text-[#0A082D]'
+              ? 'border-[#FFEA00] text-[#FFEA00]'
+              : 'border-transparent text-gray-500 hover:text-[#793205]'
               } transition-colors`}
           >
             Description
@@ -35,8 +35,8 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
               <button
                 onClick={() => setActiveTab(`specifications`)}
                 className={`py-3 px-1 font-medium text-sm border-b-2 ${activeTab === `specifications`
-                  ? 'border-[#16446A] text-[#16446A]'
-                  : 'border-transparent text-gray-500 hover:text-[#0A082D]'
+                  ? 'border-[#FFEA00] text-[#FFEA00]'
+                  : 'border-transparent text-gray-500 hover:text-[#793205]'
                   } transition-colors`}
               >
                 Specifications
@@ -44,8 +44,8 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
               <button
                 onClick={() => setActiveTab(`reviews`)}
                 className={`py-3 px-1 font-medium text-sm border-b-2 ${activeTab === `reviews`
-                  ? 'border-[#16446A] text-[#16446A]'
-                  : 'border-transparent text-gray-500 hover:text-[#0A082D]'
+                  ? 'border-[#FFEA00] text-[#FFEA00]'
+                  : 'border-transparent text-gray-500 hover:text-[#793205]'
                   } transition-colors`}
               >
                 Reviews
@@ -59,7 +59,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
       {/* Tab content */}
       <div className="py-6">
         {activeTab === 'description' && (
-          <div className="text-[#0A082D] space-y-4">
+          <div className="text-[#793205] space-y-4">
             <p>{product.description}</p>
           </div>
         )}
@@ -69,7 +69,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
             {Object.entries(product.specifications).map(([key, value]) => (
               <div key={key} className="flex">
                 <div className="w-1/3 text-sm font-medium text-gray-500">{key}</div>
-                <div className="w-2/3 text-sm text-[#0A082D]">{value}</div>
+                <div className="w-2/3 text-sm text-[#793205]">{value}</div>
               </div>
             ))}
           </div>
@@ -103,7 +103,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                     {new Date(review.date).toLocaleDateString()}
                   </span>
                 </div>
-                <p className="text-sm text-[#0A082D]">{review.comment}</p>
+                <p className="text-sm text-[#793205]">{review.comment}</p>
               </div>
             ))}
           </div>

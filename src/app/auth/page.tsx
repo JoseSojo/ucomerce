@@ -40,8 +40,8 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#72AFC1] to-[#16446A]">
-      <div className='bg-gradient-to-l bg-red-400 from-[#72AFC1] to-[#16446A] h-[70px]'>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#FFDB58ab] to-[#FFEA00ab]">
+      <div className='bg-gradient-to-l bg-red-400 from-[#FFDB58] to-[#FFEA00] h-[70px]'>
         <Header />
       </div>
       <div className="max-w-2xl min-w-2xl mx-auto px-4">

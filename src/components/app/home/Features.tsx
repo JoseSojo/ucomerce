@@ -4,22 +4,22 @@ import { Truck, ShieldCheck, CreditCard, MessageSquare } from 'lucide-react';
 const Features: React.FC = () => {
   const features = [
     {
-      icon: <MessageSquare className="w-10 h-10 text-[#72AFC1]" />,
+      icon: <MessageSquare className="w-10 h-10 text-[#FFDB58]" />,
       title: 'Pedidos vía WhatsApp',
       description: 'Ordena de forma rápida y sencilla a través de WhatsApp.'
     },
     {
-      icon: <CreditCard className="w-10 h-10 text-[#72AFC1]" />,
+      icon: <CreditCard className="w-10 h-10 text-[#FFDB58]" />,
       title: 'Compras Seguras',
       description: '100% seguridad garantizada en nuestra pasarela de pago.'
     },
     {
-      icon: <ShieldCheck className="w-10 h-10 text-[#72AFC1]" />,
+      icon: <ShieldCheck className="w-10 h-10 text-[#FFDB58]" />,
       title: 'Garantía Extendida',
       description: 'Todos nuestros productos incluyen garantía por 1 año.'
     },
     {
-      icon: <Truck className="w-10 h-10 text-[#72AFC1]" />,
+      icon: <Truck className="w-10 h-10 text-[#FFDB58]" />,
       title: 'Entrega Flexible',
       description: 'Entrega a domicilio o retiro en local, tú decides.'
     }
@@ -36,7 +36,7 @@ const Features: React.FC = () => {
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold text-[#0A082D] mb-2">{feature.title}</h3>
+              <h3 className="text-xl font-semibold text-[#793205] mb-2">{feature.title}</h3>
               <p className="text-gray-600">{feature.description}</p>
             </div>
           ))}

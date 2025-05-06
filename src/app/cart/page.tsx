@@ -62,21 +62,21 @@ const CartPage: React.FC = () => {
 
   return (
     <div className="">
-      <div className='bg-gradient-to-l bg-red-400 from-[#72AFC1] to-[#16446A] h-[70px]'>
+      <div className='bg-gradient-to-l bg-red-400 from-[#FFDB58] to-[#FFEA00] h-[70px]'>
         <Header />
       </div>
 
       <div className="min-h-screen bg-[#f7f7f7] py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center mb-8">
-            <ShoppingCart className="h-8 w-8 text-[#16446A] mr-3" />
-            <h1 className="text-3xl font-bold text-[#0A082D]">Carrito de Compras</h1>
+            <ShoppingCart className="h-8 w-8 text-[#FFEA00] mr-3" />
+            <h1 className="text-3xl font-bold text-[#793205]">Carrito de Compras</h1>
           </div>
 
           {cartItems.length === 0 ? (
             <div className="bg-white rounded-lg shadow-md p-8 text-center">
-              <ShoppingCart className="h-16 w-16 text-[#72AFC1] mx-auto mb-4" />
-              <p className="text-[#16446A] text-lg">Tu carrito está vacío</p>
+              <ShoppingCart className="h-16 w-16 text-[#FFDB58] mx-auto mb-4" />
+              <p className="text-[#FFEA00] text-lg">Tu carrito está vacío</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -93,22 +93,22 @@ const CartPage: React.FC = () => {
                         className="w-24 h-24 object-cover rounded-md"
                       />
                       <div className="ml-6 flex-1">
-                        <h3 className="text-lg font-semibold text-[#0A082D]">{item.name}</h3>
-                        <p className="text-[#16446A] mt-1">{formatPrice(item.price)}</p>
+                        <h3 className="text-lg font-semibold text-[#793205]">{item.name}</h3>
+                        <p className="text-[#FFEA00] mt-1">{formatPrice(item.price)}</p>
 
                         <div className="flex items-center justify-between mt-4">
                           <div className="flex items-center space-x-2">
                             <button
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              className="p-1 rounded-md hover:bg-[#72AFC1] hover:bg-opacity-20 text-[#16446A]"
+                              className="p-1 rounded-md hover:bg-[#FFDB58] hover:bg-opacity-20 text-[#FFEA00]"
                               disabled={item.quantity <= 1}
                             >
                               <Minus size={18} />
                             </button>
-                            <span className="w-12 text-center text-[#0A082D]">{item.quantity}</span>
+                            <span className="w-12 text-center text-[#793205]">{item.quantity}</span>
                             <button
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              className="p-1 rounded-md hover:bg-[#72AFC1] hover:bg-opacity-20 text-[#16446A]"
+                              className="p-1 rounded-md hover:bg-[#FFDB58] hover:bg-opacity-20 text-[#FFEA00]"
                               disabled={item.quantity >= item.stock}
                             >
                               <Plus size={18} />
@@ -116,7 +116,7 @@ const CartPage: React.FC = () => {
                           </div>
 
                           <div className="flex items-center space-x-4">
-                            <p className="text-[#16446A] font-semibold">
+                            <p className="text-[#FFEA00] font-semibold">
                               {formatPrice(item.price * item.quantity)}
                             </p>
                             <button
@@ -136,26 +136,26 @@ const CartPage: React.FC = () => {
               {/* Summary */}
               <div className="lg:col-span-1">
                 <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
-                  <h2 className="text-xl font-semibold text-[#0A082D] mb-4">Resumen de Compra</h2>
+                  <h2 className="text-xl font-semibold text-[#793205] mb-4">Resumen de Compra</h2>
 
                   <div className="space-y-3">
-                    <div className="flex justify-between text-[#16446A]">
+                    <div className="flex justify-between text-[#FFEA00]">
                       <span>Subtotal ({summary.itemCount} artículos)</span>
                       <span>{formatPrice(summary.subtotal)}</span>
                     </div>
-                    <div className="flex justify-between text-[#16446A]">
+                    <div className="flex justify-between text-[#FFEA00]">
                       <span>IVA (16%)</span>
                       <span>{formatPrice(summary.tax)}</span>
                     </div>
                     <div className="border-t border-gray-200 pt-3 mt-3">
-                      <div className="flex justify-between font-semibold text-lg text-[#0A082D]">
+                      <div className="flex justify-between font-semibold text-lg text-[#793205]">
                         <span>Total</span>
                         <span>{formatPrice(summary.total)}</span>
                       </div>
                     </div>
                   </div>
 
-                  <button className="w-full mt-6 bg-[#16446A] text-white py-3 px-4 rounded-md hover:bg-[#0A082D] transition-colors">
+                  <button className="w-full mt-6 bg-[#FFEA00] text-white py-3 px-4 rounded-md hover:bg-[#793205] transition-colors">
                     Proceder al Pago
                   </button>
                 </div>

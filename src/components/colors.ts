@@ -1,6 +1,6 @@
 
 export const ColorsList = [
-    `#72AFC1`,
+    `#FFDB58`,
     `#2F58CD`,
     `#D21312`,
     `#5D12D2`,

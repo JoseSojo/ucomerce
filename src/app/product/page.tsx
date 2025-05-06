@@ -65,8 +65,8 @@ export default function ProductsPage() {
                                 key={index}
                                 onClick={() => setSelectedCategory(category)}
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedCategory === category
-                                        ? 'bg-[#16446A] text-white'
-                                        : 'bg-[#72AFC1] text-white hover:bg-[#16446A]'
+                                        ? 'bg-[#FFEA00] text-white'
+                                        : 'bg-[#FFDB58] text-white hover:bg-[#FFEA00]'
                                     }`}
                             >
                                 {category === 'all' ? 'Todas' : category}

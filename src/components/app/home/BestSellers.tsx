@@ -97,7 +97,7 @@ const BestSellers: React.FC = () => {
         <div className="flex justify-center mb-8 animate-on-scroll">
           <Link
             href={`/product`}
-            className={`px-6 py-2 rounded-md transition-all bg-[#72AFC1] hover:bg-[#16446A] text-white`}
+            className={`px-6 py-2 rounded-md transition-all bg-[#FFDB58] hover:bg-[#FFEA00] text-gray-900`}
           >
             Ver Más
           </Link>
@@ -138,8 +138,8 @@ const BestSellers: React.FC = () => {
               </div>
 
               <div className="p-4 w-full">
-                <div className="text-xs text-[#72AFC1] font-medium mb-1">{product.brand}</div>
-                <h3 className="text-lg font-semibold text-[#0A082D] mb-1 transition-colors group-hover:text-[#16446A]">
+                <div className="text-xs text-[#FFDB58] font-medium mb-1">{product.brand}</div>
+                <h3 className="text-lg font-semibold text-[#793205] mb-1 transition-colors group-hover:text-[#FFEA00]">
                   {product.name}
                 </h3>
                 <div className="flex items-center mb-3">
@@ -161,7 +161,7 @@ const BestSellers: React.FC = () => {
                     ? <>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                          <span className="text-xl font-bold text-[#16446A]">
+                          <span className="text-xl font-bold text-[#FFEA00]">
                             ${product.discount > 0
                               ? (product.price - (product.price * product.discount / 100)).toFixed(2)
                               : product.price.toFixed(2)
@@ -173,15 +173,15 @@ const BestSellers: React.FC = () => {
                             </span>
                           )}
                         </div>
-                        <button className="w-10 h-10 rounded-full bg-[#72AFC1] hover:bg-[#16446A] flex items-center justify-center transition-colors">
-                          <ShoppingCart size={18} className="text-white" />
+                        <button className="w-10 h-10 rounded-full bg-[#FFDB58] hover:bg-[#FFEA00] flex items-center justify-center transition-colors">
+                          <ShoppingCart size={18} className="text-black" />
                         </button>
                       </div>
                     </>
                     : <>
                       <Link
                         href={`/auth`}
-                        className='py-3 rounded text-white font-bold flex text-center justify-center items-center m-auto w-full bg-[#72AFC1] hover:bg-[#16446A]'
+                        className='py-3 rounded text-gray-900 font-bold flex text-center justify-center items-center m-auto w-full bg-[#FFDB58] hover:bg-[#FFEA00]'
                       >
                         <span>Cotizar</span>
                       </Link>

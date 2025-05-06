@@ -44,7 +44,7 @@ const ProductImageGallery = ({ images, productName }: ProductImageGalleryProps) 
           <button
             key={index}
             className={`flex-shrink-0 w-20 h-20 rounded-md overflow-hidden border-2 ${
-              selectedImage === index ? 'border-[#16446A]' : 'border-transparent'
+              selectedImage === index ? 'border-[#FFEA00]' : 'border-transparent'
             }`}
             onClick={() => setSelectedImage(index)}
           >

@@ -13,7 +13,7 @@ export function StatisticsCard({ icon, label, value, footer }: Props) {
     return (
         <div className="p-3 border border-gray-300 rounded shadow-sm">
             <div
-                className="bg-[#72AFC1] text-white rounded-full absolute grid h-12 w-12 place-items-center"
+                className="bg-[#FFDB58] text-white rounded-full absolute grid h-12 w-12 place-items-center"
             >
                 {icon}
             </div>

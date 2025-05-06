@@ -18,7 +18,7 @@ const RelatedProducts = ({ products }: RelatedProductsProps) => {
 
   return (
     <div className="mt-12">
-      <h2 className="text-xl font-bold text-[#0A082D] mb-4">Related Products</h2>
+      <h2 className="text-xl font-bold text-[#793205] mb-4">Related Products</h2>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {products.map((product) => (
@@ -35,7 +35,7 @@ const RelatedProducts = ({ products }: RelatedProductsProps) => {
             </div>
             
             <div>
-              <h3 className="font-medium text-[#0A082D] line-clamp-2 h-12">{product.name}</h3>
+              <h3 className="font-medium text-[#793205] line-clamp-2 h-12">{product.name}</h3>
               
               {product.rating && (
                 <div className="flex items-center mt-1 mb-2">
@@ -44,9 +44,9 @@ const RelatedProducts = ({ products }: RelatedProductsProps) => {
                 </div>
               )}
               
-              { auth.session && <div className="font-bold text-[#16446A]">{formatPrice(product.price)}</div>}
+              { auth.session && <div className="font-bold text-[#FFEA00]">{formatPrice(product.price)}</div>}
               
-              <Link href={`/product/2ad10fdc-0b95-487d-822e-321d04c82216`} className="mt-3 w-full bg-[#72AFC1] hover:bg-[#16446A] text-white py-2 px-4 rounded-md text-sm transition-colors">
+              <Link href={`/product/2ad10fdc-0b95-487d-822e-321d04c82216`} className="mt-3 w-full bg-[#FFDB58] hover:bg-[#FFEA00] text-white py-2 px-4 rounded-md text-sm transition-colors">
                 View Details
               </Link>
             </div>

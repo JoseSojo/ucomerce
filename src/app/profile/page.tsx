@@ -39,7 +39,7 @@ const ProfilePage: React.FC = () => {
 
   return (
     <>
-      <div className='bg-gradient-to-l bg-red-400 from-[#72AFC1] to-[#16446A] h-[70px]'>
+      <div className='bg-gradient-to-l bg-red-400 from-[#FFDB58] to-[#FFEA00] h-[70px]'>
         <Header />
       </div>
 

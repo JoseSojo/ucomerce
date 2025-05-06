@@ -43,7 +43,7 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
     if (error || !post) {
         return (
             <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-                <div className='bg-gradient-to-l bg-red-400 from-[#72AFC1] to-[#16446A] h-[70px]'>
+                <div className='bg-gradient-to-l bg-red-400 from-[#FFDB58] to-[#FFEA00] h-[70px]'>
                     <Header />
                 </div>
                 <div className="text-center">
@@ -63,7 +63,7 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
 
     return (
         <div className="bg-gray-100 min-h-screen">
-            <div className='bg-gradient-to-l bg-red-400 from-[#72AFC1] to-[#16446A] h-[70px]'>
+            <div className='bg-gradient-to-l bg-red-400 from-[#FFDB58] to-[#FFEA00] h-[70px]'>
                 <Header />
             </div>
             <div

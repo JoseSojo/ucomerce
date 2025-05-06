@@ -14,7 +14,7 @@ export function Slide({ active }: { active: boolean }) {
             fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform
              duration-300 border border-blue-gray-100
         `}>
-            <h2 className="w-full text-center pt-3 text-2xl font-black text-gray-700">Grupo<strong className="text-[#72AFC1]">Kasama</strong></h2>
+            <h2 className="w-full text-center pt-3 text-2xl font-black text-gray-700">Grupo<strong className="text-[#FFDB58]">Kasama</strong></h2>
             <ul className="grid gap-y-2 mt-3">
                 <ItemSlide ico={<BarChart2 className="w-6 h-6" />} label="Dashboard" path="/dashboard" />
                 <ItemSlide ico={<TableProperties className="w-6 h-6" />} label="Productos" path="/dashboard/products" />

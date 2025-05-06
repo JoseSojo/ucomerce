@@ -49,7 +49,7 @@ const Categories: React.FC = () => {
         <div className="text-center mb-12 animate-on-scroll">
           <h2 className="section-title">Explora Nuestras Categorías</h2>
           <p className="section-subtitle">Encuentra la herramienta perfecta para cada trabajo</p>
-          <Link href={`/category`} className='bg-[#72AFC1] hover:bg-[#16446A] text-white px-8 py-4 rounded'>Ver Todas</Link>
+          <Link href={`/category`} className='bg-[#FFDB58] hover:bg-[#FFEA00] text-white px-8 py-4 rounded'>Ver Todas</Link>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -68,12 +68,12 @@ const Categories: React.FC = () => {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A082D] to-transparent opacity-80"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#793205] to-transparent opacity-80"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <h3 className="text-xl font-bold text-white mb-1">{category.name}</h3>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-white/80">{category.count} productos</span>
-                  <span className="w-8 h-8 bg-[#72AFC1] rounded-full flex items-center justify-center transform translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                  <span className="w-8 h-8 bg-[#FFDB58] rounded-full flex items-center justify-center transform translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
                     <ArrowRight size={18} className="text-white" />
                   </span>
                 </div>

@@ -8,7 +8,7 @@ import ProductTabs from '@/components/product/ficha/ProductTable';
 import RelatedProducts from '@/components/product/ficha/RelateProducts';
 import { mockProduct, relatedProducts } from '@/domain/products';
 
-export default function PostPage({ }: { params: { id: string } }) {
+export default function PostPage({  }: { params: { id: string } }) {
     // const id = params.id;
 
     return (

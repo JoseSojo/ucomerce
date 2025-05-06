@@ -19,7 +19,7 @@ const Hero: React.FC<Props> = ({ title }) => {
           alt="Herramientas de trabajo"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A082D]/80 to-[#16446A]/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#793205]/80 to-[#FFEA00]/50"></div>
       </div>
 
       <div className="container-custom relative z-10">
@@ -35,7 +35,7 @@ const Hero: React.FC<Props> = ({ title }) => {
             <Link href="#productos" className="btn-primary flex items-center justify-center gap-2">
               Ver Productos <ChevronRight size={18} />
             </Link>
-            <Link href="#contacto" className="btn-outline bg-white/10 text-white border-white hover:bg-white hover:text-[#16446A] flex items-center justify-center gap-2">
+            <Link href="#contacto" className="btn-outline bg-white/10 text-white border-white hover:bg-white hover:text-[#FFEA00] flex items-center justify-center gap-2">
               Contáctanos <ChevronRight size={18} />
             </Link>
           </div>

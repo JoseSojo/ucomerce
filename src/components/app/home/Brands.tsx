@@ -53,7 +53,7 @@ const Brands: React.FC = () => {
                   alt={brand.name} 
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0A082D]/70 to-transparent flex items-start justify-center pt-6">
+                <div className="absolute inset-0 bg-gradient-to-b from-[#793205]/70 to-transparent flex items-start justify-center pt-6">
                   <h3 className="text-2xl font-bold text-white">{brand.name}</h3>
                 </div>
               </div>
@@ -62,18 +62,18 @@ const Brands: React.FC = () => {
                 <p className="text-gray-700 mb-4">{brand.description}</p>
                 <div className="flex flex-col space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="font-medium text-[#16446A]">Fundada:</span>
+                    <span className="font-medium text-[#FFEA00]">Fundada:</span>
                     <span>{brand.established}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="font-medium text-[#16446A]">Especialidad:</span>
+                    <span className="font-medium text-[#FFEA00]">Especialidad:</span>
                     <span>{brand.featured}</span>
                   </div>
                 </div>
                 <div className="mt-6">
                   <Link
                     href="#" 
-                    className="block w-full py-2 text-center rounded border border-[#16446A] text-[#16446A] hover:bg-[#16446A] hover:text-white transition-colors"
+                    className="block w-full py-2 text-center rounded border border-[#FFEA00] text-[#FFEA00] hover:bg-[#FFEA00] hover:text-gray-700 font-bold transition-colors"
                   >
                     Ver Productos
                   </Link>
