@@ -94,7 +94,7 @@ const Blog: React.FC = () => {
         </div>
         
         <div className="text-center mt-10 animate-on-scroll">
-          <Link href="#" className="btn-outline inline-flex items-center gap-2">
+          <Link href="/blog" className="btn-outline inline-flex items-center gap-2">
             Explorar Blog Completo <ChevronRight size={18} />
           </Link>
         </div>

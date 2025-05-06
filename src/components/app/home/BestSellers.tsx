@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Star, ShoppingCart, Heart, Eye } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { useAuth } from '@/domain/context/AuthContext';
 
 const BestSellers: React.FC = () => {
   const [activeTab] = useState('herramientas');
-  
+  const auth = useAuth();
+
   const products = {
     herramientas: [
       {
@@ -92,21 +93,21 @@ const BestSellers: React.FC = () => {
           <h2 className="section-title">Los Más Vendidos Este Mes</h2>
           <p className="section-subtitle">Descubre por qué nuestros clientes confían en estos productos</p>
         </div>
-        
+
         <div className="flex justify-center mb-8 animate-on-scroll">
-            <Link
-              href={`/products`}
-              className={`px-6 py-2 rounded-md transition-all bg-[#72AFC1] hover:bg-[#16446A] text-white`}
-            >
-              Ver Más
-            </Link>
-            
+          <Link
+            href={`/product`}
+            className={`px-6 py-2 rounded-md transition-all bg-[#72AFC1] hover:bg-[#16446A] text-white`}
+          >
+            Ver Más
+          </Link>
+
         </div>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products[activeTab as keyof typeof products].map((product, index) => (
-            <div 
-              key={product.id} 
+            <div
+              key={product.id}
               className="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 animate-on-scroll"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
@@ -126,17 +127,17 @@ const BestSellers: React.FC = () => {
                 </div>
                 <div className="aspect-w-1 aspect-h-1 h-48">
                   <img
-                  width={25}
-                  height={25}
-                    src={product.image} 
-                    alt={product.name} 
+                    width={25}
+                    height={25}
+                    src={product.image}
+                    alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-gray-900/50 to-transparent h-20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
-              
-              <div className="p-4">
+
+              <div className="p-4 w-full">
                 <div className="text-xs text-[#72AFC1] font-medium mb-1">{product.brand}</div>
                 <h3 className="text-lg font-semibold text-[#0A082D] mb-1 transition-colors group-hover:text-[#16446A]">
                   {product.name}
@@ -144,35 +145,48 @@ const BestSellers: React.FC = () => {
                 <div className="flex items-center mb-3">
                   <div className="flex text-yellow-400">
                     {[...Array(5)].map((_, i) => (
-                      <Star 
-                        key={i} 
+                      <Star
+                        key={i}
                         size={14}
-                        fill={i < Math.floor(product.rating) ? "currentColor" : "none"} 
+                        fill={i < Math.floor(product.rating) ? "currentColor" : "none"}
                         className={i < Math.floor(product.rating) ? "text-yellow-400" : "text-gray-300"}
                       />
                     ))}
                   </div>
                   <span className="text-sm text-gray-500 ml-1">({product.rating})</span>
                 </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <span className="text-xl font-bold text-[#16446A]">
-                      ${product.discount > 0 
-                        ? (product.price - (product.price * product.discount / 100)).toFixed(2)
-                        : product.price.toFixed(2)
-                      }
-                    </span>
-                    {product.discount > 0 && (
-                      <span className="text-sm text-gray-400 line-through ml-2">
-                        ${product.price.toFixed(2)}
-                      </span>
-                    )}
-                  </div>
-                  <button className="w-10 h-10 rounded-full bg-[#72AFC1] hover:bg-[#16446A] flex items-center justify-center transition-colors">
-                    <ShoppingCart size={18} className="text-white" />
-                  </button>
-                </div>
+
+                {
+                  auth.session
+                    ? <>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <span className="text-xl font-bold text-[#16446A]">
+                            ${product.discount > 0
+                              ? (product.price - (product.price * product.discount / 100)).toFixed(2)
+                              : product.price.toFixed(2)
+                            }
+                          </span>
+                          {product.discount > 0 && (
+                            <span className="text-sm text-gray-400 line-through ml-2">
+                              ${product.price.toFixed(2)}
+                            </span>
+                          )}
+                        </div>
+                        <button className="w-10 h-10 rounded-full bg-[#72AFC1] hover:bg-[#16446A] flex items-center justify-center transition-colors">
+                          <ShoppingCart size={18} className="text-white" />
+                        </button>
+                      </div>
+                    </>
+                    : <>
+                      <Link
+                        href={`/auth`}
+                        className='py-3 rounded text-white font-bold flex text-center justify-center items-center m-auto w-full bg-[#72AFC1] hover:bg-[#16446A]'
+                      >
+                        <span>Cotizar</span>
+                      </Link>
+                    </>
+                }
               </div>
             </div>
           ))}

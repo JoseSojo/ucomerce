@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 
@@ -10,11 +12,11 @@ const FloatingButtons: React.FC = () => {
 
   const handleWhatsAppClick = () => {
     if(!window) return;
-    window.open('https://wa.me/1234567890', '_blank');
+    window.open('https://wa.me/584128606734', '_blank');
   };
 
   return (
-    <div className="fixed bottom-24 left-4 md:bottom-8 z-40 flex flex-col space-y-4">
+    <div className="fixed bottom-24 right-4 md:bottom-8 z-40 flex flex-col space-y-4">
       {/* Chat Window */}
       {isChatOpen && (
         <div className="bg-white rounded-lg shadow-lg w-72 md:w-80 overflow-hidden animate-slide-up">
@@ -48,7 +50,7 @@ const FloatingButtons: React.FC = () => {
       {/* Chat Button */}
       <button
         onClick={toggleChat}
-        className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full p-3 shadow-lg transition-transform duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50"
+        className="duration-300 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full p-3 shadow-lg transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50"
       >
         <MessageCircle size={24} />
       </button>

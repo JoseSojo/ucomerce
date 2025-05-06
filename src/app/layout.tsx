@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ToastProvider } from "@/components/template/ToastContainer";
+import { AuthProvider } from "@/domain/context/AuthContext";
+import FloatingButtons from "@/components/common/FoattingButton";
 
 export const metadata: Metadata = {
   title: "GrupoKasama",
@@ -19,7 +21,10 @@ export default function RootLayout({
         className={``}
       >
         <ToastProvider>
-          {children}
+          <AuthProvider>
+            {children}
+            <FloatingButtons />
+          </AuthProvider>
         </ToastProvider>
       </body>
     </html>

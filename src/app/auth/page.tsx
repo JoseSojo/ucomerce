@@ -5,8 +5,10 @@ import { Mail, Lock, AlertCircle } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/components/app/home/Header';
+import { useAuth } from '@/domain/context/AuthContext';
 
 const LoginPage: React.FC = () => {
+  const auth = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -28,6 +30,7 @@ const LoginPage: React.FC = () => {
     const successful = true; //login(email, password);
     
     if (successful) {
+      auth.login();
       redirect('/profile');
     } else {
       setError('Invalid credentials. Try admin@example.com / abc.123');

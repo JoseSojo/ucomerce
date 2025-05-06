@@ -41,7 +41,7 @@ const HomePage: React.FC = () => {
       <BestSellers />
       <Brands />
       <Blog />
-      <Training />
+      {/* <Training /> */}
       {/* <Testimonials /> */}
       <Footer />
       <MobileNav />

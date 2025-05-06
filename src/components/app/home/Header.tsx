@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, X, LogOut } from 'lucide-react';
 import Link from 'next/link';
+import { useAuth } from '@/domain/context/AuthContext';
 
 const Header: React.FC = () => {
+  const auth = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    if(!window) return;
+    if (!window) return;
     const handleScroll = () => {
       const offset = window.scrollY;
       setScrolled(offset > 50);
@@ -32,35 +34,62 @@ const Header: React.FC = () => {
               Grupo<span className="text-[#72AFC1]">Kasama</span>
             </h1>
           </div>
-          
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Inicio</Link>
-            <Link href="/category" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Categorías</Link>
-            <Link href="/products" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Productos</Link>
-            <Link href="/blog" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Blog</Link>
-            <Link href="#contacto" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Contacto</Link>
+            {
+              auth.session
+                ? <>
+                  <Link href="/" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Inicio</Link>
+                  <Link href="/category" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Categorías</Link>
+                  <Link href="/product" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Productos</Link>
+                  <Link href="/blog" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Blog</Link>
+                  <Link href="#contacto" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Contacto</Link>
+                </>
+                : <>
+                  <Link href="/" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Inicio</Link>
+                  <Link href="/product" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Productos</Link>
+                  <Link href="/blog" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Blog</Link>
+                  <Link href="#contacto" className={`font-medium hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>Contacto</Link>
+                </>
+            }
           </nav>
-          
+
           {/* Desktop Right Icons */}
           <div className="hidden md:flex items-center space-x-6">
             <button className={`hover:text-[#72AFC1] transition-colors ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>
               <Search size={20} />
             </button>
-            <Link href={`/cart`} className={`hover:text-[#72AFC1] transition-colors relative ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>
-              <ShoppingCart size={20} />
-              <span className="absolute -top-2 -right-2 bg-[#72AFC1] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-            </Link>
-            <Link href={`/auth`} className={`flex items-center space-x-1 ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>
-              <User size={20} />
-              <span className="font-medium hover:text-[#72AFC1] transition-colors">Iniciar Sesión</span>
-            </Link>
+            {
+              auth.session
+                ? <>
+                  <Link href={`/cart`} className={`hover:text-[#72AFC1] transition-colors relative ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>
+                    <ShoppingCart size={20} />
+                    <span className="absolute -top-2 -right-2 bg-[#72AFC1] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                  </Link>
+                  <Link href={`/profile`} className={`flex items-center space-x-1 ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>
+                    <User size={20} />
+                    <span className="font-medium hover:text-[#72AFC1] transition-colors">Perfíl</span>
+                  </Link>
+                  <button onClick={auth.logout} className={`flex items-center space-x-1 ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>
+                    <LogOut size={20} />
+                    <span className="font-medium hover:text-[#72AFC1] transition-colors">Salir</span>
+                  </button>
+                </>
+                : <>
+                  <Link href={`/auth`} className={`flex items-center space-x-1 ${scrolled ? 'text-[#16446A]' : 'text-white'}`}>
+                    <User size={20} />
+                    <span className="font-medium hover:text-[#72AFC1] transition-colors">Iniciar Sesión</span>
+                  </Link>
+                </>
+            }
+
           </div>
-          
+
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button 
-              onClick={toggleMenu} 
+            <button
+              onClick={toggleMenu}
               className={`${scrolled ? 'text-[#16446A]' : 'text-white'} focus:outline-none`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -68,7 +97,7 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Mobile Navigation Menu */}
       <div className={`md:hidden absolute top-full left-0 right-0 bg-white shadow-lg transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="container mx-auto py-4 px-4">
@@ -81,7 +110,7 @@ const Header: React.FC = () => {
           </nav>
         </div>
       </div>
-    </header>
+    </header >
   );
 };
 

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { ActiveCredit, ActiveUser, Category, Product, ProductCrud, Sale } from '../domain/types';
+import { ActiveCredit, ActiveUser, Category, CompanyProfile, Product, ProductCrud, Sale } from '../domain/types';
 import { BlogPost } from './blog';
 
 export const categories: Category[] = [
@@ -474,3 +474,91 @@ export const blogPosts: BlogPost[] = [
     tags: ['Authentication', 'Web Security', 'Development'],
   },
 ];
+
+export const companyProfile: CompanyProfile = {
+  id: '1',
+  companyName: 'Constructora Andina S.A.C.',
+  ruc: '20123456789',
+  email: 'contacto@constructoraandina.com',
+  phone: '+51 (1) 555-0123',
+  address: {
+    street: 'Av. Industrial 1234',
+    city: 'Lima',
+    state: 'Lima',
+    country: 'Perú',
+    postalCode: '15001'
+  },
+  legalRepresentative: {
+    name: 'María González',
+    position: 'Gerente General',
+    email: 'maria.gonzalez@constructoraandina.com',
+    phone: '+51 987 654 321'
+  },
+  creditInfo: {
+    limit: 50000,
+    used: 15000,
+    available: 35000,
+    lastEvaluation: '2024-02-15',
+    creditScore: 85
+  },
+  purchases: [
+    {
+      id: 'P001',
+      date: '2024-03-15',
+      products: [
+        {
+          id: '1',
+          name: 'Taladro Percutor Industrial',
+          quantity: 5,
+          price: 299.99,
+          total: 1499.95
+        },
+        {
+          id: '2',
+          name: 'Set de Herramientas Profesionales',
+          quantity: 3,
+          price: 89.99,
+          total: 269.97
+        }
+      ],
+      total: 1769.92,
+      status: 'completed',
+      paymentMethod: 'Crédito Empresarial',
+      invoiceNumber: 'F001-00123'
+    },
+    {
+      id: 'P002',
+      date: '2024-03-10',
+      products: [
+        {
+          id: '3',
+          name: 'Generador Industrial 5000W',
+          quantity: 1,
+          price: 2499.99,
+          total: 2499.99
+        }
+      ],
+      total: 2499.99,
+      status: 'completed',
+      paymentMethod: 'Transferencia Bancaria',
+      invoiceNumber: 'F001-00124'
+    },
+    {
+      id: 'P003',
+      date: '2024-03-05',
+      products: [
+        {
+          id: '5',
+          name: 'Compresora Industrial 100L',
+          quantity: 2,
+          price: 1299.99,
+          total: 2599.98
+        }
+      ],
+      total: 2599.98,
+      status: 'pending',
+      paymentMethod: 'Crédito Empresarial',
+      invoiceNumber: 'F001-00125'
+    }
+  ]
+};

@@ -3,12 +3,15 @@ import { Package2, ShoppingCart } from 'lucide-react';
 import { ProductCrud } from '@/domain/types';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAuth } from '@/domain/context/AuthContext';
 
 interface ProductCardProps {
   product: ProductCrud;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const auth = useAuth();
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <Link href={`/product/${product.id}`}>
@@ -45,18 +48,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {product.description}
         </p>
 
-        <div className="flex items-center justify-between mt-4">
-          <div className="flex items-center space-x-2">
-            <Package2 size={18} className="text-primary-medium" />
-            <span className="text-sm text-gray-600">Stock: {product.stock}</span>
-          </div>
-          <span className="text-2xl font-bold text-primary-dark">${product.price}</span>
-        </div>
+        {
+          auth.session && <>
+            <div className="flex items-center justify-between mt-4">
+              <div className="flex items-center space-x-2">
+                <Package2 size={18} className="text-primary-medium" />
+                <span className="text-sm text-gray-600">Stock: {product.stock}</span>
+              </div>
+              <span className="text-2xl font-bold text-primary-dark">${product.price}</span>
+            </div>
 
-        <button className="mt-6 w-full bg-primary-medium hover:bg-primary-dark text-white py-2 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center">
-          <ShoppingCart size={20} className="mr-2" />
-          Agregar al carrito
-        </button>
+            <button className="mt-6 w-full bg-primary-medium hover:bg-primary-dark text-white py-2 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center">
+              <ShoppingCart size={20} className="mr-2" />
+              Agregar al carrito
+            </button>
+          </>
+        }
       </div>
     </div>
   );

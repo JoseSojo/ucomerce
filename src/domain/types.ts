@@ -60,6 +60,30 @@ export interface ActiveCredit {
   nextPaymentDate: Date;
 }
 
+export interface ProductData2 {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  stock: number;
+  imageUrl: string;
+  images?: string[];
+  specifications?: Record<string, string>;
+  rating?: number;
+  reviews?: Review[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Review {
+  id: string;
+  userName: string;
+  rating: number;
+  comment: string;
+  date: string;
+}
+
 export interface ProductCrud {
   id: string;
   name: string;
@@ -75,3 +99,50 @@ export interface ProductCrud {
 export type ProductDataDTO = Omit<ProductCrud, `id` | `createdAt` | `updatedAt`>
 
 export type CategoryDataDTO = Omit<Category, `id` | `subcategories`>
+
+export interface CompanyProfile {
+  id: string;
+  companyName: string;
+  ruc: string;
+  email: string;
+  phone: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    country: string;
+    postalCode: string;
+  };
+  legalRepresentative: {
+    name: string;
+    position: string;
+    email: string;
+    phone: string;
+  };
+  creditInfo: {
+    limit: number;
+    used: number;
+    available: number;
+    lastEvaluation: string;
+    creditScore: number;
+  };
+  purchases: Purchase[];
+}
+
+export interface Purchase {
+  id: string;
+  date: string;
+  products: PurchaseProduct[];
+  total: number;
+  status: 'pending' | 'completed' | 'cancelled';
+  paymentMethod: string;
+  invoiceNumber: string;
+}
+
+export interface PurchaseProduct {
+  id: string;
+  name: string;
+  quantity: number;
+  price: number;
+  total: number;
+}

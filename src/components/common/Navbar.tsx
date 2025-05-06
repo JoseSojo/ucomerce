@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { ShoppingCart, User, Search, Menu, X, Home, CarrotIcon } from 'lucide-react';
 import Link from 'next/link';
+import { useAuth } from '@/domain/context/AuthContext';
 
 const Navbar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);

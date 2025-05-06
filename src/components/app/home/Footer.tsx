@@ -36,13 +36,11 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-semibold mb-6">Enlaces Rápidos</h3>
             <ul className="space-y-3">
-              <li><Link href="/dashboard" className="text-white/80 hover:text-[#72AFC1] transition-colors">Administración</Link></li>
+              {/* <li><Link href="/dashboard" className="text-white/80 hover:text-[#72AFC1] transition-colors">Administración</Link></li> */}
               <li><Link href="#" className="text-white/80 hover:text-[#72AFC1] transition-colors">Inicio</Link></li>
-              <li><Link href="#productos" className="text-white/80 hover:text-[#72AFC1] transition-colors">Productos</Link></li>
-              <li><Link href="#categorias" className="text-white/80 hover:text-[#72AFC1] transition-colors">Categorías</Link></li>
-              <li><Link href="#blog" className="text-white/80 hover:text-[#72AFC1] transition-colors">Blog</Link></li>
-              <li><Link href="#" className="text-white/80 hover:text-[#72AFC1] transition-colors">Sobre Nosotros</Link></li>
-              <li><Link href="#contacto" className="text-white/80 hover:text-[#72AFC1] transition-colors">Contacto</Link></li>
+              <li><Link href="/product" className="text-white/80 hover:text-[#72AFC1] transition-colors">Productos</Link></li>
+              <li><Link href="/category" className="text-white/80 hover:text-[#72AFC1] transition-colors">Categorías</Link></li>
+              <li><Link href="/blog" className="text-white/80 hover:text-[#72AFC1] transition-colors">Blog</Link></li>
             </ul>
           </div>
           
