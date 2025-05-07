@@ -1,15 +1,19 @@
-import { useState } from 'react';
-import { ShoppingCart, Package, Heart, Share2, Shield, TruckIcon, StarIcon } from 'lucide-react';
-import { ProductData2 } from '@/domain/types';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { ShoppingCart, Package, StarIcon } from 'lucide-react';
 import { useAuth } from '@/domain/context/AuthContext';
+import { ProductDto } from '@/domain/dto/product.dto';
+import { useEcomerce } from '@/domain/context/EcomerceContext';
 
 interface ProductInfoProps {
-  product: ProductData2;
+  product: ProductDto;
+  setQuantity: Dispatch<SetStateAction<number>>;
+  quantity: number
 }
 
-const ProductInfo = ({ product }: ProductInfoProps) => {
+const ProductInfo = ({ product, setQuantity,quantity }: ProductInfoProps) => {
   const auth = useAuth();
-  const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useEcomerce();
+
   const [isFavorite, setIsFavorite] = useState(false);
 
   const incrementQuantity = () => {
@@ -54,12 +58,15 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   return (
     <div className="flex flex-col space-y-6">
       {/* Breadcrumb */}
-      <div className="flex text-sm text-[#FFEA00]/70">
-        <span>Electronics</span>
+      <div className="flex text-sm text-amber-500">
+        <span>{product.category.name}</span>
         <span className="mx-2">&gt;</span>
-        <span>Smartphones</span>
-        <span className="mx-2">&gt;</span>
-        <span className="font-medium">{product.name}</span>
+        {
+          product.subcategory.map((sub) => (
+            <span key={`sub-${sub.name}-${sub.id}`} className='px-3 py-1 rounded-lg text-xs ml-1 bg-amber-400 text-black'>{sub.name}</span>
+
+          ))
+        }
       </div>
 
       {/* Product title and rating */}
@@ -113,51 +120,13 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
-          <button className="flex-1 bg-[#FFEA00] hover:bg-[#793205] text-white py-3 px-6 rounded-md transition-colors flex items-center justify-center">
+          <button onClick={()=>addToCart(product, quantity ? quantity  : 1)} className="flex-1 bg-[#FFEA00] hover:bg-[#793205] text-white py-3 px-6 rounded-md transition-colors flex items-center justify-center">
             <ShoppingCart size={20} className="mr-2" />
             Add to Cart
           </button>
           <button className="flex-1 bg-[#FFDB58] hover:bg-[#FFEA00] text-white py-3 px-6 rounded-md transition-colors">
             Buy Now
           </button>
-        </div>
-
-        <div className="flex space-x-4">
-          <button
-            onClick={() => setIsFavorite(!isFavorite)}
-            className="flex items-center text-sm text-[#FFEA00] hover:text-[#793205]"
-          >
-            <Heart
-              size={18}
-              className="mr-1"
-              fill={isFavorite ? "#FFEA00" : "none"}
-            />
-            {isFavorite ? 'Saved' : 'Save'}
-          </button>
-          <button className="flex items-center text-sm text-[#FFEA00] hover:text-[#793205]">
-            <Share2 size={18} className="mr-1" />
-            Share
-          </button>
-        </div>
-      </div>}
-
-      {/* Shipping and warranty */}
-      {auth.session && <div className="bg-[#f7f7f7] p-4 rounded-md space-y-3">
-        <div className="flex items-start">
-          <TruckIcon size={20} className="text-[#FFEA00] mr-3 mt-1 flex-shrink-0" />
-          <div>
-            <p className="text-sm font-medium text-[#793205]">Free shipping nationwide</p>
-            <p className="text-xs text-gray-500">
-              Get it by {new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}
-            </p>
-          </div>
-        </div>
-        <div className="flex items-start">
-          <Shield size={20} className="text-[#FFEA00] mr-3 mt-1 flex-shrink-0" />
-          <div>
-            <p className="text-sm font-medium text-[#793205]">12 months official warranty</p>
-            <p className="text-xs text-gray-500">Full coverage for manufacturing defects</p>
-          </div>
         </div>
       </div>}
 

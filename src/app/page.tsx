@@ -8,7 +8,6 @@ import Categories from '@/components/app/home/Categories';
 import BestSellers from '@/components/app/home/BestSellers';
 import Brands from '@/components/app/home/Brands';
 import Blog from '@/components/app/home/Blog';
-import Training from '@/components/app/home/Training';
 import Footer from '@/components/app/home/Footer';
 import MobileNav from '@/components/common/MobileNav';
 

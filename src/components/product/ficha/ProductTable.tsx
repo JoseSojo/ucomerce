@@ -1,20 +1,16 @@
 import { useAuth } from '@/domain/context/AuthContext';
+import { ProductDto } from '@/domain/dto/product.dto';
 import { ProductData2 } from '@/domain/types';
+import Link from 'next/link';
 import { useState } from 'react';
 
 interface ProductTabsProps {
-  product: ProductData2;
+  product: ProductDto;
 }
 
 const ProductTabs = ({ product }: ProductTabsProps) => {
   const auth = useAuth();
   const [activeTab, setActiveTab] = useState('description');
-
-  const tabs = [
-    { id: 'description', name: 'Description' },
-    { id: 'specifications', name: 'Specifications' },
-    { id: 'reviews', name: 'Reviews' },
-  ];
 
   return (
     <div className="mt-8">
@@ -41,16 +37,14 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
               >
                 Specifications
               </button>
-              <button
-                onClick={() => setActiveTab(`reviews`)}
-                className={`py-3 px-1 font-medium text-sm border-b-2 ${activeTab === `reviews`
-                  ? 'border-[#FFEA00] text-[#FFEA00]'
-                  : 'border-transparent text-gray-500 hover:text-[#793205]'
-                  } transition-colors`}
+              <Link
+                href="https://www.turnerlibros.com/wp-content/uploads/2021/02/ejemplo.pdf"
+                target='_black'
+                download={true}
+                className={`py-3 px-4 font-medium text-sm border-b-2 duration-200 border-[#cc2900] bg-[#f13c0f] hover:bg-[#cc2900] text-[#ffffff]`}
               >
-                Reviews
-                {product.reviews && <span className="ml-1">({product.reviews.length})</span>}
-              </button>
+                Descargar Ficha
+              </Link>
             </>
           }
         </div>
@@ -75,7 +69,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
           </div>
         )}</>}
 
-        {auth.session && <>{activeTab === 'reviews' && product.reviews && (
+        {/* {auth.session && <>{activeTab === 'reviews' && product.reviews && (
           <div className="space-y-6">
             {product.reviews.map((review) => (
               <div key={review.id} className="border-b border-[#e9e9e9] pb-4 last:border-0">
@@ -107,7 +101,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
               </div>
             ))}
           </div>
-        )}</>}
+        )}</>} */}
       </div>
     </div>
   );

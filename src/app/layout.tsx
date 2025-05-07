@@ -3,6 +3,7 @@ import "./globals.css";
 import { ToastProvider } from "@/components/template/ToastContainer";
 import { AuthProvider } from "@/domain/context/AuthContext";
 import FloatingButtons from "@/components/common/FoattingButton";
+import { EcomerceProvider } from "@/domain/context/EcomerceContext";
 
 export const metadata: Metadata = {
   title: "GrupoKasama",
@@ -22,7 +23,9 @@ export default function RootLayout({
       >
         <ToastProvider>
           <AuthProvider>
-            {children}
+            <EcomerceProvider>
+              {children}
+            </EcomerceProvider>
             <FloatingButtons />
           </AuthProvider>
         </ToastProvider>

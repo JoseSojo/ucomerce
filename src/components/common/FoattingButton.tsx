@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { MessageCircle, X } from 'lucide-react';
+import { GitCompareArrows, MessageCircle, X } from 'lucide-react';
+import { useEcomerce } from '@/domain/context/EcomerceContext';
 
 const FloatingButtons: React.FC = () => {
+  const { compare } = useEcomerce();
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   const toggleChat = () => {
@@ -46,6 +48,15 @@ const FloatingButtons: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* WhatsApp Button */}
+      { compare.length > 0 && <button
+        onClick={handleWhatsAppClick}
+        className="relative bg-amber-300 hover:bg-amber-400 text-white rounded-full p-3 shadow-lg transition-transform duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50"
+      >
+        <span className='absolute -top-1 left-0 bg-red-400 px-1 text-xs font-bold rounded-full'>{compare.length}</span>
+        <GitCompareArrows />
+      </button>}
 
       {/* Chat Button */}
       <button

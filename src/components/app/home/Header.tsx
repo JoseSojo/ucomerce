@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Search, ShoppingCart, User, Menu, X, LogOut } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, X, LogOut, ChevronDown, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '@/domain/context/AuthContext';
+import CategoryDropdown from '@/components/common/dropdown/CategoryDropdown';
+import { useEcomerce } from '@/domain/context/EcomerceContext';
 
 const Header: React.FC = () => {
+  const { cart } = useEcomerce();
   const auth = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -31,7 +34,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <div className="flex items-center">
             <h1 className={`text-2xl font-bold ${scrolled ? 'text-[#793205]' : 'text-white'}`}>
-              Grupo<span className="text-[#FFDB58]">Kasama</span>
+              Grupo<span className="text-[#000]">Kasama</span>
             </h1>
           </div>
 
@@ -40,46 +43,51 @@ const Header: React.FC = () => {
             {
               auth.session
                 ? <>
-                  <Link href="/" className={`font-medium hover:text-[#FFDB58] transition-colors ${scrolled ? 'text-[#FFEA00]' : 'text-white'}`}>Inicio</Link>
-                  <Link href="/category" className={`font-medium hover:text-[#FFDB58] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Categorías</Link>
-                  <Link href="/product" className={`font-medium hover:text-[#FFDB58] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Productos</Link>
-                  <Link href="/blog" className={`font-medium hover:text-[#FFDB58] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Blog</Link>
-                  <Link href="#contacto" className={`font-medium hover:text-[#FFDB58] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Contacto</Link>
+                  <Link href="/" className={`font-medium hover:text-[#000] transition-colors ${scrolled ? 'text-[#FFEA00]' : 'text-white'}`}>Inicio</Link>
+                  <CategoryDropdown isOpen={isOpen} scrolled={scrolled} setIsOpen={setIsOpen} />
+                  <Link href="/product" className={`font-medium hover:text-[#000] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Productos</Link>
+                  <Link href="/blog" className={`font-medium hover:text-[#000] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Blog</Link>
+                  <Link href="#contacto" className={`font-medium hover:text-[#000] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Contacto</Link>
                 </>
                 : <>
-                  <Link href="/" className={`font-medium hover:text-[#FFDB58] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Inicio</Link>
-                  <Link href="/product" className={`font-medium hover:text-[#FFDB58] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Productos</Link>
-                  <Link href="/blog" className={`font-medium hover:text-[#FFDB58] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Blog</Link>
-                  <Link href="#contacto" className={`font-medium hover:text-[#FFDB58] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Contacto</Link>
+                  <Link href="/" className={`font-medium hover:text-[#000] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Inicio</Link>
+                  <CategoryDropdown isOpen={isOpen} scrolled={scrolled} setIsOpen={setIsOpen} />
+                  <Link href="/product" className={`font-medium hover:text-[#000] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Productos</Link>
+                  <Link href="/blog" className={`font-medium hover:text-[#000] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Blog</Link>
+                  <Link href="#contacto" className={`font-medium hover:text-[#000] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>Contacto</Link>
                 </>
             }
           </nav>
 
           {/* Desktop Right Icons */}
           <div className="hidden md:flex items-center space-x-6">
-            <button className={`hover:text-[#FFDB58] transition-colors ${scrolled ? 'text-[#793205]' : 'text-white'}`}>
-              <Search size={20} />
-            </button>
             {
               auth.session
                 ? <>
-                  <Link href={`/cart`} className={`hover:text-[#FFDB58] transition-colors relative ${scrolled ? 'text-[#793205]' : 'text-white'}`}>
-                    <ShoppingCart size={20} />
-                    <span className="absolute -top-2 -right-2 bg-[#FFDB58] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                  </Link>
+                  {
+                    cart.length
+                      ? <Link href={`/cart`} className={`hover:text-[#000] transition-colors relative ${scrolled ? 'text-[#793205]' : 'text-white'}`}>
+                        <ShoppingCart size={20} />
+                        <span className={`
+                          absolute -top-2 -right-2 text-xs rounded-full w-5 h-5 flex items-center justify-center
+                          ${ scrolled ? `text-white bg-[#FFDB58]` : `bg-white text-[#FFDB58]` }
+                        `}>{cart.length}</span> 
+                      </Link>
+                      : <></>
+                  }
                   <Link href={`/profile`} className={`flex items-center space-x-1 ${scrolled ? 'text-[#793205]' : 'text-white'}`}>
                     <User size={20} />
-                    <span className="font-medium hover:text-[#FFDB58] transition-colors">Perfíl</span>
+                    <span className="font-medium hover:text-[#000] transition-colors">Perfíl</span>
                   </Link>
                   <button onClick={auth.logout} className={`flex items-center space-x-1 ${scrolled ? 'text-[#793205]' : 'text-white'}`}>
                     <LogOut size={20} />
-                    <span className="font-medium hover:text-[#FFDB58] transition-colors">Salir</span>
+                    <span className="font-medium hover:text-[#000] transition-colors">Salir</span>
                   </button>
                 </>
                 : <>
                   <Link href={`/auth`} className={`flex items-center space-x-1 ${scrolled ? 'text-[#793205]' : 'text-white'}`}>
                     <User size={20} />
-                    <span className="font-medium hover:text-[#FFDB58] transition-colors">Iniciar Sesión</span>
+                    <span className="font-medium hover:text-[#000] transition-colors">Iniciar Sesión</span>
                   </Link>
                 </>
             }
@@ -102,11 +110,11 @@ const Header: React.FC = () => {
       <div className={`md:hidden absolute top-full left-0 right-0 bg-white shadow-lg transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="container mx-auto py-4 px-4">
           <nav className="flex flex-col space-y-4">
-            <Link href="#" className="font-medium text-[#793205] hover:text-[#FFDB58] py-2 border-b border-gray-100">Inicio</Link>
-            <Link href="#categorias" className="font-medium text-[#793205] hover:text-[#FFDB58] py-2 border-b border-gray-100">Categorías</Link>
-            <Link href="#productos" className="font-medium text-[#793205] hover:text-[#FFDB58] py-2 border-b border-gray-100">Productos</Link>
-            <Link href="#blog" className="font-medium text-[#793205] hover:text-[#FFDB58] py-2 border-b border-gray-100">Blog</Link>
-            <Link href="#contacto" className="font-medium text-[#793205] hover:text-[#FFDB58] py-2">Contacto</Link>
+            <Link href="#" className="font-medium text-[#793205] hover:text-[#000] py-2 border-b border-gray-100">Inicio</Link>
+            <Link href="#categorias" className="font-medium text-[#793205] hover:text-[#000] py-2 border-b border-gray-100">Categorías</Link>
+            <Link href="#productos" className="font-medium text-[#793205] hover:text-[#000] py-2 border-b border-gray-100">Productos</Link>
+            <Link href="#blog" className="font-medium text-[#793205] hover:text-[#000] py-2 border-b border-gray-100">Blog</Link>
+            <Link href="#contacto" className="font-medium text-[#793205] hover:text-[#000] py-2">Contacto</Link>
           </nav>
         </div>
       </div>
