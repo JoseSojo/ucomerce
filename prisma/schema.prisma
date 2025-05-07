@@ -13,131 +13,130 @@ datasource db {
 // -----------------------------------------// MODELOS
 // -----------------------------------------
 
-model Usuario {
+model User {
   id           String     @id @default(dbgenerated("auth.uid()")) @db.Uuid
   email        String     @unique
-  rol          String     @default("cliente") // cliente, vendedor, admin
-  nombre       String?
-  apellido     String?
-  telefono     String?
-  empresa      String?
+  role         String     @default("cliente") // cliente, vendedor, admin
+  firstName    String?
+  lastName     String?
+  phone        String?
+  company      String?
   rfc          String?
-  creadoEn     DateTime   @default(now()) @map("creado_en") @db.Timestamptz
-  sesiones     Sesion[]
-  creditos     Credito[]
-  cotizaciones Cotizacion[] @relation("cliente_cotizaciones")
-  vendedorEn   Cotizacion[] @relation("vendedor_cotizaciones")
+  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz
+  sessions     Session[]
+  credits      Credit[]
+  quotations   Quotation[] @relation("customer_quotations")
+  sellerIn     Quotation[] @relation("seller_quotations")
 
-  @@map("usuarios")
+  @@map("users")
 }
 
-model Sesion {
+model Session {
   id         String   @id @default(uuid()) @db.Uuid
-  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
-  usuarioId  String   @db.Uuid
-  dispositivo String?
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String   @db.Uuid
+  device     String?
   ip         String?
-  creadoEn   DateTime @default(now()) @map("creado_en") @db.Timestamptz
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
 
-  @@map("sesiones")
+  @@map("sessions")
 }
 
-model Categoria {
+model Category {
   id          String     @id @default(uuid()) @db.Uuid
-  nombre      String
-  descripcion String?
-  padre       Categoria? @relation("categoria_hija", fields: [padreId], references: [id])
-  padreId     String?    @db.Uuid
-  productos   Producto[]
-  categorias  Categoria[] @relation("categoria_hija")
+  name        String
+  description String?
+  parent      Category? @relation("child_category", fields: [parentId], references: [id])
+  parentId    String?    @db.Uuid
+  products    Product[]
+  categories  Category[] @relation("child_category")
 
-  @@map("categorias")
+  @@map("categories")
 }
 
-model Producto {
+model Product {
   id          String   @id @default(uuid()) @db.Uuid
-  nombre      String
-  descripcion String?
-  precio      Decimal  @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
+  name        String
+  description String?
+  price       Decimal  @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
   sku         String   @unique
-  categoria   Categoria? @relation(fields: [categoriaId], references: [id])
-  categoriaId String?  @db.Uuid
+  category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  String?  @db.Uuid
   stock       Int      @default(0)
-  imagenUrl   String?  @map("imagen_url")
-  activo      Boolean  @default(true)
-  creadoEn    DateTime @default(now()) @map("creado_en") @db.Timestamptz
-  items       ItemCotizacion[]
+  imageUrl    String?  @map("image_url")
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  items       QuotationItem[]
 
-  @@map("productos")
+  @@map("products")
 }
 
-model Credito {
+model Credit {
   id                String   @id @default(uuid()) @db.Uuid
-  usuario           Usuario  @relation(fields: [usuarioId], references: [id])
-  usuarioId         String   @db.Uuid
-  limite            Decimal  @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
-  disponible        Decimal  @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
-  fechaActualizacion DateTime @default(now()) @map("fecha_actualizacion") @db.Timestamptz
-  historial         HistorialCredito[]
+  user              User     @relation(fields: [userId], references: [id])
+  userId            String   @db.Uuid
+  limit             Decimal  @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
+  available         Decimal  @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
+  updatedAt         DateTime @default(now()) @map("updated_at") @db.Timestamptz
+  history           CreditHistory[]
 
-  @@map("creditos")
+  @@map("credits")
 }
 
-model HistorialCredito {
+model CreditHistory {
   id          String   @id @default(uuid()) @db.Uuid
-  creditoId   String   @db.Uuid
-  credito     Credito  @relation(fields: [creditoId], references: [id])
-  monto       Decimal  @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
-  tipo        String
-  referencia  String?
-  descripcion String?
-  creadoEn    DateTime @default(now()) @map("creado_en") @db.Timestamptz
+  creditId    String   @db.Uuid
+  credit      Credit   @relation(fields: [creditId], references: [id])
+  amount      Decimal  @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
+  type        String
+  reference   String?
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
 
-  @@map("historial_credito")
+  @@map("credit_history")
 }
 
-model Cotizacion {
+model Quotation {
   id           String    @id @default(uuid()) @db.Uuid
-  cliente      Usuario   @relation("cliente_cotizaciones", fields: [clienteId], references: [id])
-  clienteId    String    @db.Uuid
-  vendedor     Usuario?  @relation("vendedor_cotizaciones", fields: [vendedorId], references: [id])
-  vendedorId   String?   @db.Uuid
-  estado       String    @default("borrador")
+  customer     User      @relation("customer_quotations", fields: [customerId], references: [id])
+  customerId   String    @db.Uuid
+  seller       User?     @relation("seller_quotations", fields: [sellerId], references: [id])
+  sellerId     String?   @db.Uuid
+  status       String    @default("draft")
   subtotal     Decimal   @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
-  iva          Decimal   @db.Decimal(10, 2) @default(0) // ← Cambiado de Float a Decimal
+  tax          Decimal   @db.Decimal(10, 2) @default(0) // ← Cambiado de Float a Decimal
   total        Decimal   @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
-  validezDias  Int       @default(30) @map("validez_dias")
-  notas        String?
-  creadoEn     DateTime  @default(now()) @map("creado_en") @db.Timestamptz
-  actualizadoEn DateTime @default(now()) @map("actualizado_en") @db.Timestamptz
-  items        ItemCotizacion[]
-  documentos   Documento[]
+  validityDays Int       @default(30) @map("validity_days")
+  notes        String?
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt    DateTime  @default(now()) @map("updated_at") @db.Timestamptz
+  items        QuotationItem[]
+  documents    Document[]
 
-  @@map("cotizaciones")
+  @@map("quotations")
 }
 
-model ItemCotizacion {
+model QuotationItem {
   id             String   @id @default(uuid()) @db.Uuid
-  cotizacion     Cotizacion @relation(fields: [cotizacionId], references: [id])
-  cotizacionId   String   @db.Uuid
-  producto       Producto? @relation(fields: [productoId], references: [id])
-  productoId     String?  @db.Uuid
-  cantidad       Int
-  precioUnitario Decimal  @db.Decimal(10, 2) @map("precio_unitario") // ← Cambiado de Float a Decimal
-  descuento      Decimal  @db.Decimal(10, 2) @default(0) // ← Cambiado de Float a Decimal
-  notas          String?
+  quotation      Quotation @relation(fields: [quotationId], references: [id])
+  quotationId    String   @db.Uuid
+  product        Product? @relation(fields: [productId], references: [id])
+  productId      String?  @db.Uuid
+  quantity       Int
+  unitPrice      Decimal  @db.Decimal(10, 2) @map("unit_price") // ← Cambiado de Float a Decimal
+  discount       Decimal  @db.Decimal(10, 2) @default(0) // ← Cambiado de Float a Decimal
+  notes          String?
 
-  @@map("items_cotizacion")
+  @@map("quotation_items")
 }
 
-
-model Documento {
+model Document {
   id           String     @id @default(uuid()) @db.Uuid
-  cotizacion   Cotizacion @relation(fields: [cotizacionId], references: [id])
-  cotizacionId String     @db.Uuid
+  quotation    Quotation  @relation(fields: [quotationId], references: [id])
+  quotationId  String     @db.Uuid
   url          String
-  tipo         String     // cotizacion, factura, orden_compra
-  creadoEn     DateTime   @default(now()) @map("creado_en") @db.Timestamptz
+  type         String     // cotizacion, factura, orden_compra
+  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz
 
-  @@map("documentos")
+  @@map("documents")
 }
