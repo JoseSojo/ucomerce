@@ -1,12 +1,19 @@
-import type { NextConfig } from "next";
+import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: true, // Mejora la detección de errores en desarrollo
   eslint: {
-    ignoreDuringBuilds: true, // Ignora todos los errores de ESLint durante el build
+    ignoreDuringBuilds: true, // Ignora errores de ESLint en el proceso de compilación
   },
   typescript: {
-    ignoreBuildErrors: true, // Ignora errores de TypeScript durante el build
+    ignoreBuildErrors: true, // Permite la compilación sin bloquearse por errores de TypeScript
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@services": require("path").resolve(__dirname, "src/domain/services"),
+    };
+    return config;
   }
 };
 

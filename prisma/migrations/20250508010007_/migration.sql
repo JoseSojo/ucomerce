@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "users" (
-    "id" UUID NOT NULL DEFAULT auth.uid(),
+    "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
     "role" TEXT NOT NULL DEFAULT 'cliente',
     "firstName" TEXT,
@@ -15,8 +15,8 @@ CREATE TABLE "users" (
 
 -- CreateTable
 CREATE TABLE "sessions" (
-    "id" UUID NOT NULL,
-    "userId" UUID NOT NULL,
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
     "device" TEXT,
     "ip" TEXT,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -26,22 +26,22 @@ CREATE TABLE "sessions" (
 
 -- CreateTable
 CREATE TABLE "categories" (
-    "id" UUID NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
-    "parentId" UUID,
+    "parentId" INTEGER,
 
     CONSTRAINT "categories_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "products" (
-    "id" UUID NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
     "price" DECIMAL(10,2) NOT NULL,
     "sku" TEXT NOT NULL,
-    "categoryId" UUID,
+    "categoryId" INTEGER,
     "stock" INTEGER NOT NULL DEFAULT 0,
     "image_url" TEXT,
     "active" BOOLEAN NOT NULL DEFAULT true,
@@ -52,8 +52,8 @@ CREATE TABLE "products" (
 
 -- CreateTable
 CREATE TABLE "credits" (
-    "id" UUID NOT NULL,
-    "userId" UUID NOT NULL,
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
     "limit" DECIMAL(10,2) NOT NULL,
     "available" DECIMAL(10,2) NOT NULL,
     "updated_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -63,8 +63,8 @@ CREATE TABLE "credits" (
 
 -- CreateTable
 CREATE TABLE "credit_history" (
-    "id" UUID NOT NULL,
-    "creditId" UUID NOT NULL,
+    "id" SERIAL NOT NULL,
+    "creditId" INTEGER NOT NULL,
     "amount" DECIMAL(10,2) NOT NULL,
     "type" TEXT NOT NULL,
     "reference" TEXT,
@@ -76,9 +76,9 @@ CREATE TABLE "credit_history" (
 
 -- CreateTable
 CREATE TABLE "quotations" (
-    "id" UUID NOT NULL,
-    "customerId" UUID NOT NULL,
-    "sellerId" UUID,
+    "id" SERIAL NOT NULL,
+    "customerId" INTEGER NOT NULL,
+    "sellerId" INTEGER,
     "status" TEXT NOT NULL DEFAULT 'draft',
     "subtotal" DECIMAL(10,2) NOT NULL,
     "tax" DECIMAL(10,2) NOT NULL DEFAULT 0,
@@ -93,9 +93,9 @@ CREATE TABLE "quotations" (
 
 -- CreateTable
 CREATE TABLE "quotation_items" (
-    "id" UUID NOT NULL,
-    "quotationId" UUID NOT NULL,
-    "productId" UUID,
+    "id" SERIAL NOT NULL,
+    "quotationId" INTEGER NOT NULL,
+    "productId" INTEGER,
     "quantity" INTEGER NOT NULL,
     "unit_price" DECIMAL(10,2) NOT NULL,
     "discount" DECIMAL(10,2) NOT NULL DEFAULT 0,
@@ -106,8 +106,8 @@ CREATE TABLE "quotation_items" (
 
 -- CreateTable
 CREATE TABLE "documents" (
-    "id" UUID NOT NULL,
-    "quotationId" UUID NOT NULL,
+    "id" SERIAL NOT NULL,
+    "quotationId" INTEGER NOT NULL,
     "url" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,

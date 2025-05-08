@@ -14,7 +14,7 @@ datasource db {
 // -----------------------------------------
 
 model User {
-  id           String     @id @default(dbgenerated("auth.uid()")) @db.Uuid
+  id           Int     @id @default(autoincrement()) 
   email        String     @unique
   role         String     @default("cliente") // cliente, vendedor, admin
   firstName    String?
@@ -32,9 +32,9 @@ model User {
 }
 
 model Session {
-  id         String   @id @default(uuid()) @db.Uuid
+  id         Int   @id @default(autoincrement()) 
   user       User     @relation(fields: [userId], references: [id])
-  userId     String   @db.Uuid
+  userId     Int   
   device     String?
   ip         String?
   createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
@@ -43,11 +43,11 @@ model Session {
 }
 
 model Category {
-  id          String     @id @default(uuid()) @db.Uuid
+  id          Int    @id @default(autoincrement()) 
   name        String
   description String?
   parent      Category? @relation("child_category", fields: [parentId], references: [id])
-  parentId    String?    @db.Uuid
+  parentId    Int?    
   products    Product[]
   categories  Category[] @relation("child_category")
 
@@ -55,13 +55,13 @@ model Category {
 }
 
 model Product {
-  id          String   @id @default(uuid()) @db.Uuid
+  id          Int   @id @default(autoincrement()) 
   name        String
   description String?
   price       Decimal  @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
   sku         String   @unique
   category    Category? @relation(fields: [categoryId], references: [id])
-  categoryId  String?  @db.Uuid
+  categoryId  Int?  
   stock       Int      @default(0)
   imageUrl    String?  @map("image_url")
   active      Boolean  @default(true)
@@ -72,9 +72,9 @@ model Product {
 }
 
 model Credit {
-  id                String   @id @default(uuid()) @db.Uuid
+  id                Int   @id @default(autoincrement()) 
   user              User     @relation(fields: [userId], references: [id])
-  userId            String   @db.Uuid
+  userId            Int  
   limit             Decimal  @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
   available         Decimal  @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
   updatedAt         DateTime @default(now()) @map("updated_at") @db.Timestamptz
@@ -84,8 +84,8 @@ model Credit {
 }
 
 model CreditHistory {
-  id          String   @id @default(uuid()) @db.Uuid
-  creditId    String   @db.Uuid
+  id          Int   @id @default(autoincrement()) 
+  creditId    Int   
   credit      Credit   @relation(fields: [creditId], references: [id])
   amount      Decimal  @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
   type        String
@@ -97,11 +97,11 @@ model CreditHistory {
 }
 
 model Quotation {
-  id           String    @id @default(uuid()) @db.Uuid
+  id           Int    @id @default(autoincrement()) 
   customer     User      @relation("customer_quotations", fields: [customerId], references: [id])
-  customerId   String    @db.Uuid
+  customerId   Int    
   seller       User?     @relation("seller_quotations", fields: [sellerId], references: [id])
-  sellerId     String?   @db.Uuid
+  sellerId     Int?   
   status       String    @default("draft")
   subtotal     Decimal   @db.Decimal(10, 2) // ← Cambiado de Float a Decimal
   tax          Decimal   @db.Decimal(10, 2) @default(0) // ← Cambiado de Float a Decimal
@@ -117,11 +117,11 @@ model Quotation {
 }
 
 model QuotationItem {
-  id             String   @id @default(uuid()) @db.Uuid
+  id             Int   @id @default(autoincrement()) 
   quotation      Quotation @relation(fields: [quotationId], references: [id])
-  quotationId    String   @db.Uuid
+  quotationId    Int   
   product        Product? @relation(fields: [productId], references: [id])
-  productId      String?  @db.Uuid
+  productId      Int?  
   quantity       Int
   unitPrice      Decimal  @db.Decimal(10, 2) @map("unit_price") // ← Cambiado de Float a Decimal
   discount       Decimal  @db.Decimal(10, 2) @default(0) // ← Cambiado de Float a Decimal
@@ -131,9 +131,9 @@ model QuotationItem {
 }
 
 model Document {
-  id           String     @id @default(uuid()) @db.Uuid
+  id           Int     @id @default(autoincrement()) 
   quotation    Quotation  @relation(fields: [quotationId], references: [id])
-  quotationId  String     @db.Uuid
+  quotationId  Int     
   url          String
   type         String     // cotizacion, factura, orden_compra
   createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz
